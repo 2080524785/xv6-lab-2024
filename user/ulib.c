@@ -92,6 +92,7 @@ atoi(const char *s)
   n = 0;
   while('0' <= *s && *s <= '9')
     n = n*10 + *s++ - '0';
+  if(*s!='\0') return -1;
   return n;
 }
 

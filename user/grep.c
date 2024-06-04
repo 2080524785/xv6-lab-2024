@@ -32,6 +32,7 @@ grep(char *pattern, int fd)
     }
   }
 }
+// TODO: process multifile
 
 int
 main(int argc, char *argv[])
