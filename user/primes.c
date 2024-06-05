@@ -16,7 +16,7 @@ void func(int *input, int num){
     pipe(p);
 
     if(fork() == 0){
-        // close(p[0]);
+        close(p[0]);
         for(i = 0; i< num;i++){
             temp = *(input + i);
             write(p[1], (char *)(&temp), 4);
@@ -26,7 +26,7 @@ void func(int *input, int num){
     close(p[1]);
 
     if(fork()==0){
-        // close(p[1]);
+        close(p[1]);
         int counter = 0;
         char buffer[4];
         while(read(p[0], buffer, 4) != 0){
