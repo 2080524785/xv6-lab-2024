@@ -3,7 +3,7 @@
 #include "user/user.h"
 
 char buf[512];
-
+int output_lines = 0;
 void
 wc(int fd, char *name)
 {
@@ -29,7 +29,10 @@ wc(int fd, char *name)
     printf("wc: read error\n");
     exit(1);
   }
-  printf("%d %d %d %s\n", l, w, c, name);
+  if(output_lines == 0)
+    printf("%d %d %d %s\n", l, w, c, name);
+  else
+    printf("%d\n", l);
 }
 
 int
@@ -38,11 +41,15 @@ main(int argc, char *argv[])
   int fd, i;
 
   if(argc <= 1){
-    wc(0, "");
-    exit(0);
+    fprintf(2, "usage: wc [-l] file\n");
+    exit(1);
   }
 
-  for(i = 1; i < argc; i++){
+  if(argc>2 && strcmp(argv[1], "-l") == 0){
+    output_lines = 1;
+  }
+
+  for(i = 1+output_lines; i < argc; i++){
     if((fd = open(argv[i], 0)) < 0){
       printf("wc: cannot open %s\n", argv[i]);
       exit(1);
