@@ -289,6 +289,8 @@ fork(void)
       np->ofile[i] = filedup(p->ofile[i]);
   np->cwd = idup(p->cwd);
 
+  np->mask = p->mask;
+
   safestrcpy(np->name, p->name, sizeof(p->name));
 
   pid = np->pid;
