@@ -179,6 +179,10 @@ int             copyout(pagetable_t, uint64, char *, uint64);
 int             copyin(pagetable_t, char *, uint64, uint64);
 int             copyinstr(pagetable_t, char *, uint64, uint64);
 void            vmprint(pagetable_t);
+pagetable_t     proc_kvminit();
+void            proc_kvmmap(pagetable_t, uint64, uint64, uint64, int);
+void            proc_freewalk(pagetable_t);
+void            uvm2ukvm(pagetable_t, pagetable_t, uint64, uint64);
 
 // plic.c
 void            plicinit(void);
@@ -202,6 +206,11 @@ void            statsinc(void);
 
 // sprintf.c
 int             snprintf(char*, int, char*, ...);
+
+// vmcopyin.c
+int             statscopyin(char *, int);
+int             copyin_new(pagetable_t , char *, uint64 , uint64);
+int             copyinstr_new(pagetable_t , char *, uint64 , uint64 );
 
 #ifdef LAB_NET
 // pci.c
